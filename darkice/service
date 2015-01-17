@@ -1,0 +1,12 @@
+[Unit]
+Description=DarkIce Live Stream %i
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/darkice -c /etc/darkice/%i.cfg
+RestartSec=10s
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
