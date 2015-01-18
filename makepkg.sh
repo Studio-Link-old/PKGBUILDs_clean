@@ -42,6 +42,7 @@ $ssh "git clone https://github.com/Studio-Link/PKGBUILDs_clean.git /tmp/PKGBUILD
 $ssh "chown -R build /tmp/PKGBUILDs"
 $ssh "echo -e 'root ALL=(ALL) ALL\nbuild ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers"
 makepkg="sudo -u build makepkg --force --install --noconfirm --syncdeps"
+$ssh "pump --shutdown"
 $ssh "cd /tmp/PKGBUILDs/opus; $makepkg"
 $ssh "cd /tmp/PKGBUILDs/jack2; $makepkg"
 $ssh "cd /tmp/PKGBUILDs/libre; $makepkg"
