@@ -24,7 +24,7 @@ $ssh "$pacman -S hiredis libmicrohttpd"
 $ssh "yes | pacman -S linux-am33x"
 
 echo "### Install build requirements ###"
-$ssh "$pacman -S base-devel"
+$ssh "$pacman -S base-devel distcc"
 
 echo "### Download all packages ###"
 $ssh "yes | pacman -Scc"
@@ -32,10 +32,16 @@ $ssh "pacman -Qq > /tmp/packages"
 $ssh "bash -c \"pacman --noconfirm --force -Sw \$(cat /tmp/packages|tr '\n' ' ')\""
 
 echo "### Build ###"
+systemctl start distccd
+useradd -m build
+$ssh "sed -i s/\!distcc/distcc/ /etc/makepkg.conf"
+$ssh "echo 'DISTCC_HOSTS=\"127.0.0.1 10.0.2.2\"' >> /etc/makepkg.conf"
+$ssh "echo 'MAKEFLAGS=\"-j4\"' >> /etc/makepkg.conf"
+
 $ssh "git clone https://github.com/Studio-Link/PKGBUILDs_clean.git /tmp/PKGBUILDs"
-$ssh "chown -R nobody /tmp/PKGBUILDs"
-$ssh "echo -e 'root ALL=(ALL) ALL\nnobody ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers"
-makepkg="sudo -u nobody makepkg --force --install --noconfirm --syncdeps"
+$ssh "chown -R build /tmp/PKGBUILDs"
+$ssh "echo -e 'root ALL=(ALL) ALL\nbuild ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers"
+makepkg="sudo -u build makepkg --force --install --noconfirm --syncdeps"
 $ssh "cd /tmp/PKGBUILDs/opus; $makepkg"
 $ssh "cd /tmp/PKGBUILDs/jack2; $makepkg"
 $ssh "cd /tmp/PKGBUILDs/libre; $makepkg"
