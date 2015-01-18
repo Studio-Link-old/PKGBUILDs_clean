@@ -35,7 +35,7 @@ echo "### Build ###"
 $ssh "systemctl start distccd"
 $ssh "useradd -m build"
 $ssh "sed -i s/\!distcc/distcc/ /etc/makepkg.conf"
-$ssh "echo 'DISTCC_HOSTS=\"127.0.0.1 10.0.2.2\"' >> /etc/makepkg.conf"
+$ssh "echo 'DISTCC_HOSTS=\"10.0.2.2\"' >> /etc/makepkg.conf"
 $ssh "echo 'MAKEFLAGS=\"-j4\"' >> /etc/makepkg.conf"
 
 $ssh "git clone https://github.com/Studio-Link/PKGBUILDs_clean.git /tmp/PKGBUILDs"
