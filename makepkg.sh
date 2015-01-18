@@ -6,14 +6,13 @@ pacman="pacman --noconfirm --force --needed"
 version="15.1.0-beta"
 export QEMU_AUDIO_DRV=none
 $qemu -daemonize -M vexpress-a9 -kernel zImage \
-	-drive file=root.img,if=sd,cache=none -append "root=/dev/mmcblk0p2 rw" \
+	-drive file=root_pkgbuild.img,if=sd,cache=none -append "root=/dev/mmcblk0p2 rw" \
 	-m 512 -net nic -net user,hostfwd=tcp::2222-:22 -snapshot
 sleep 20
 
 $ssh "echo 'Server = http://mirror.studio-connect.de/$version/armv7h/\$repo' > /etc/pacman.d/mirrorlist"
 
 echo "### Install requirements ###"
-$ssh "pacman-db-upgrade"
 $ssh "$pacman -Syu"
 $ssh "pacman-db-upgrade"
 $ssh "$pacman -S git vim ntp nginx aiccu python2 python2-distribute avahi wget"
@@ -42,7 +41,7 @@ $ssh "git clone https://github.com/Studio-Link/PKGBUILDs_clean.git /tmp/PKGBUILD
 $ssh "chown -R build /tmp/PKGBUILDs"
 $ssh "echo -e 'root ALL=(ALL) ALL\nbuild ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers"
 makepkg="sudo -u build makepkg --force --install --noconfirm --syncdeps"
-$ssh "pump --shutdown"
+$ssh "pump --shutdown" #bugfix distcc client error
 $ssh "cd /tmp/PKGBUILDs/opus; $makepkg"
 $ssh "cd /tmp/PKGBUILDs/jack2; $makepkg"
 $ssh "cd /tmp/PKGBUILDs/libre; $makepkg"
