@@ -12,6 +12,8 @@ license=('GPL')
 depends=('lame' 'faac' 'twolame' 'opus' 'libsamplerate')
 source=("http://darkice.googlecode.com/files/${pkgname}-${pkgver}.tar.gz"
 	'service')
+md5sums=('de541ea95a73a50f2f5e700434c22329'
+         '82dfec1a959cf8584b8d20aa579c6d9e')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
@@ -35,7 +37,3 @@ package() {
   mkdir -p "$pkgdir/etc/darkice"
   mv "$pkgdir/etc/darkice.cfg" "$pkgdir/etc/darkice/darkice.cfg"
 }
-md5sums=('de541ea95a73a50f2f5e700434c22329'
-         'a2608524120e6bb1c704ed4c9165a386')
-md5sums=('de541ea95a73a50f2f5e700434c22329'
-         '1c1cde0a5c03a2190a48275c03016eb8')
