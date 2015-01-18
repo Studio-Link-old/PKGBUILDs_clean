@@ -32,8 +32,8 @@ $ssh "pacman -Qq > /tmp/packages"
 $ssh "bash -c \"pacman --noconfirm --force -Sw \$(cat /tmp/packages|tr '\n' ' ')\""
 
 echo "### Build ###"
-systemctl start distccd
-useradd -m build
+$ssh "systemctl start distccd"
+$ssh "useradd -m build"
 $ssh "sed -i s/\!distcc/distcc/ /etc/makepkg.conf"
 $ssh "echo 'DISTCC_HOSTS=\"127.0.0.1 10.0.2.2\"' >> /etc/makepkg.conf"
 $ssh "echo 'MAKEFLAGS=\"-j4\"' >> /etc/makepkg.conf"
