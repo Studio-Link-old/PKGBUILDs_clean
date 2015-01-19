@@ -4,6 +4,18 @@ ssh="ssh  -o StrictHostKeyChecking=no root@127.0.0.1 -p2222"
 scp="scp -P2222 -r root@127.0.0.1:"
 pacman="pacman --noconfirm --force --needed"
 version="15.1.0-beta"
+pkgbuilds="
+opus
+jack2
+libre
+librem
+baresip
+jack_capture
+aj-snapshot
+jack_gaudio
+darkice
+studio-webapp
+"
 export QEMU_AUDIO_DRV=none
 $qemu -daemonize -M vexpress-a9 -kernel zImage \
 	-drive file=root_pkgbuild.img,if=sd,cache=none -append "root=/dev/mmcblk0p2 rw" \
@@ -40,18 +52,13 @@ $ssh "echo 'MAKEFLAGS=\"-j4\"' >> /etc/makepkg.conf"
 $ssh "git clone https://github.com/Studio-Link/PKGBUILDs_clean.git /tmp/PKGBUILDs"
 $ssh "chown -R build /tmp/PKGBUILDs"
 $ssh "echo -e 'root ALL=(ALL) ALL\nbuild ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers"
-makepkg="sudo -u build makepkg --force --install --noconfirm --syncdeps"
+makepkg="sudo -u build makepkg --install --noconfirm --syncdeps"
 $ssh "pump --shutdown" #bugfix distcc client error
-$ssh "cd /tmp/PKGBUILDs/opus; $makepkg"
-$ssh "cd /tmp/PKGBUILDs/jack2; $makepkg"
-$ssh "cd /tmp/PKGBUILDs/libre; $makepkg"
-$ssh "cd /tmp/PKGBUILDs/librem; $makepkg"
-$ssh "cd /tmp/PKGBUILDs/baresip; $makepkg"
-$ssh "cd /tmp/PKGBUILDs/jack_capture; $makepkg"
-$ssh "cd /tmp/PKGBUILDs/aj-snapshot; $makepkg"
-$ssh "cd /tmp/PKGBUILDs/jack_gaudio; $makepkg"
-$ssh "cd /tmp/PKGBUILDs/darkice; $makepkg"
-$ssh "cd /tmp/PKGBUILDs/studio-webapp; $makepkg"
+for pkg in $pkgbuilds; do
+    scp -P2222 /var/www/$version/armv7h/studio/$pkg-*.tar.xz \
+        root@127.0.0.1:/tmp/PKGBUILDs/$pkg/ || true
+    $ssh "cd /tmp/PKGBUILDs/$pkg; $makepkg || $pacman -U $pkg-*.tar.xz"
+done
 
 $ssh "cp -a /tmp/PKGBUILDs/*/*armv7h.pkg.tar.xz /var/cache/pacman/pkg/"
 
