@@ -60,3 +60,4 @@ mkdir -p /var/www/$version
 rm -f /var/www/$version/*
 $scp/var/cache/pacman/pkg/*.pkg.tar.xz /var/www/$version/
 $scp/root/studio-link.db.tar.gz /var/www/$version/
+ln -s /var/www/$version/studio-link.db.tar.gz /var/www/$version/studio-link.db
