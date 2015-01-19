@@ -57,7 +57,7 @@ $ssh "pump --shutdown" #bugfix distcc client error
 for pkg in $pkgbuilds; do
     scp -P2222 /var/www/$version/armv7h/studio/$pkg-*.tar.xz \
         root@127.0.0.1:/tmp/PKGBUILDs/$pkg/ || true
-    $ssh "cd /tmp/PKGBUILDs/$pkg; $makepkg || $pacman -U $pkg-*.tar.xz"
+    $ssh "cd /tmp/PKGBUILDs/$pkg; $makepkg"
 done
 
 $ssh "cp -a /tmp/PKGBUILDs/*/*armv7h.pkg.tar.xz /var/cache/pacman/pkg/"
