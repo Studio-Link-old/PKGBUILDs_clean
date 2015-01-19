@@ -55,10 +55,10 @@ $ssh "cd /tmp/PKGBUILDs/studio-webapp; $makepkg"
 
 $ssh "cp -a /tmp/PKGBUILDs/*/*armv7h.pkg.tar.xz /var/cache/pacman/pkg/"
 
-$ssh "repo-add /root/studio-link.db.tar.gz /var/cache/pacman/pkg/*.pkg.tar.xz"
+$ssh "repo-add /root/studio.db.tar.gz /var/cache/pacman/pkg/*.pkg.tar.xz"
 
-mkdir -p /var/www/$version
-rm -f /var/www/$version/*
-$scp/var/cache/pacman/pkg/*.pkg.tar.xz /var/www/$version/
-$scp/root/studio-link.db.tar.gz /var/www/$version/
-ln -s /var/www/$version/studio-link.db.tar.gz /var/www/$version/studio-link.db
+mkdir -p /var/www/$version/armv7h/studio
+rm -f /var/www/$version/armv7h/studio/*
+$scp/var/cache/pacman/pkg/*.pkg.tar.xz /var/www/$version/armv7h/studio/
+$scp/root/studio.db.tar.gz /var/www/$version/armv7h/studio/
+ln -s /var/www/$version/armv7h/studio/studio-link.db.tar.gz /var/www/$version/armv7h/studio/studio.db
