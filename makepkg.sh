@@ -51,6 +51,7 @@ $ssh "cd /tmp/PKGBUILDs/jack_capture; $makepkg"
 $ssh "cd /tmp/PKGBUILDs/aj-snapshot; $makepkg"
 $ssh "cd /tmp/PKGBUILDs/jack_gaudio; $makepkg"
 $ssh "cd /tmp/PKGBUILDs/darkice; $makepkg"
+$ssh "cd /tmp/PKGBUILDs/studio-webapp; $makepkg"
 
 $ssh "cp -a /tmp/PKGBUILDs/*/*armv7h.pkg.tar.xz /var/cache/pacman/pkg/"
 

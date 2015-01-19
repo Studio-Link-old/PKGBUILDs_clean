@@ -1,5 +1,5 @@
 # Maintainer: Sebastian Reimers <hallo@studio-link.de>
-pkgname=webapp
+pkgname=studio-webapp
 pkgver=15.1.0
 pkgrel=1
 arch=(armv7h x86_64)
@@ -10,14 +10,14 @@ source=("https://github.com/Studio-Link/webapp/archive/$suffix.tar.gz")
 md5sums=('SKIP')
 
 build() {
-    cd $pkgname-$suffix/long_polling
+    cd webapp-$suffix/long_polling
     make
 }
 
 package() {
     mkdir -p "${pkgdir}/opt/studio"
     virtualenv2 --system-site-packages --python=python2.7 "${pkgdir}/opt/studio"
-    cp -a ${srcdir}/$pkgname-$suffix ${pkgdir}/opt/studio/webapp
+    cp -a ${srcdir}/webapp-$suffix ${pkgdir}/opt/studio/webapp
     ${pkgdir}/opt/studio/bin/pip install pytz==2014.10 
     ${pkgdir}/opt/studio/bin/pip install --upgrade -r ${pkgdir}/opt/studio/webapp/requirements.txt
 }
