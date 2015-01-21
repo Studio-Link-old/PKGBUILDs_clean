@@ -68,4 +68,4 @@ mkdir -p /var/www/$version/armv7h/studio
 rm -f /var/www/$version/armv7h/studio/*
 $scp/var/cache/pacman/pkg/*.pkg.tar.xz /var/www/$version/armv7h/studio/
 $scp/root/studio.db.tar.gz /var/www/$version/armv7h/studio/
-ln -s /var/www/$version/armv7h/studio/studio-link.db.tar.gz /var/www/$version/armv7h/studio/studio.db
+ln -s /var/www/$version/armv7h/studio/studio.db.tar.gz /var/www/$version/armv7h/studio/studio.db
