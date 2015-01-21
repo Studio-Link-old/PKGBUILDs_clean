@@ -1,7 +1,7 @@
 # Maintainer: Sebastian Reimers <hallo@studio-link.de>
 pkgname=studio-webapp
 pkgver=15.1.0
-pkgrel=1
+pkgrel=2
 arch=(armv7h x86_64)
 license=('BSD license')
 suffix="master"
@@ -16,7 +16,7 @@ build() {
 
 package() {
     mkdir -p "${pkgdir}/opt/studio"
-    virtualenv2 --system-site-packages --python=python2.7 "${pkgdir}/opt/studio"
+    virtualenv2 --relocatable --system-site-packages --python=python2.7 "${pkgdir}/opt/studio"
     cp -a ${srcdir}/webapp-$suffix ${pkgdir}/opt/studio/webapp
     ${pkgdir}/opt/studio/bin/pip install pytz==2014.10 
     ${pkgdir}/opt/studio/bin/pip install --upgrade -r ${pkgdir}/opt/studio/webapp/requirements.txt
