@@ -1,7 +1,7 @@
 # Maintainer: Sebastian Reimers <hallo@studio-link.de>
 pkgname=studio-webapp
 pkgver=15.1.0
-pkgrel=2
+pkgrel=3
 arch=(armv7h x86_64)
 license=('BSD license')
 suffix="master"
