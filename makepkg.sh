@@ -31,7 +31,7 @@ $ssh "$pacman -S git vim ntp nginx aiccu python2 python2-distribute avahi wget"
 $ssh "$pacman -S python2-virtualenv alsa-plugins alsa-utils gcc make redis sudo fake-hwclock"
 $ssh "$pacman -S python2-numpy ngrep tcpdump lldpd"
 $ssh "$pacman -S spandsp gsm celt"
-$ssh "$pacman -S hiredis libmicrohttpd openvpn"
+$ssh "$pacman -S hiredis libmicrohttpd openvpn dosfstools"
 $ssh "yes | pacman --needed -S linux-am33x"
 
 echo "### Install build requirements ###"
