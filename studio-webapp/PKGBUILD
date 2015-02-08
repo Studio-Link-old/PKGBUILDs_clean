@@ -5,8 +5,7 @@ pkgrel=4
 arch=(armv7h x86_64)
 license=('BSD license')
 suffix="master"
-#source=("https://github.com/Studio-Link/webapp/archive/$pkgver-beta.tar.gz")
-source=("https://github.com/Studio-Link/webapp/archive/$suffix.tar.gz")
+source=("https://github.com/Studio-Link/webapp/archive/$pkgver-beta.tar.gz")
 md5sums=('SKIP')
 
 build() {
