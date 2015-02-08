@@ -9,7 +9,7 @@ license=('BSD license')
 depends=(glibc)
 #options=(!strip)
 source=(https://github.com/studio-link/baresip/archive/$pkgver-beta.tar.gz)
-md5sums=('ba83256c4e8aa5605bb2629d02cd2600')
+md5sums=('6781953409e664a4f859f2c7773c3490')
 
 build() {
     cd $pkgname-$pkgver-beta
