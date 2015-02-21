@@ -34,8 +34,8 @@ $ssh "$pacman -S spandsp gsm celt"
 $ssh "$pacman -S hiredis libmicrohttpd openvpn dosfstools"
 $ssh "yes | pacman --needed -S linux-am33x"
 
-echo "### Install build requirements ###"
-$ssh "$pacman -S base-devel distcc"
+echo "### Install build requirements and tools ###"
+$ssh "$pacman -S base-devel distcc cpufrequtils"
 
 echo "### Download all packages ###"
 $ssh "yes | pacman -Scc"
