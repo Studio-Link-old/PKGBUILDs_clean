@@ -1,7 +1,7 @@
 # Maintainer: Sebastian Reimers <hallo@studio-link.de>
 pkgname=studio-webapp
 pkgver=15.3.0
-pkgrel=1
+pkgrel=2
 arch=(armv7h x86_64)
 license=('BSD license')
 source=("https://github.com/Studio-Link/webapp/archive/master.tar.gz")
@@ -16,7 +16,7 @@ package() {
     mkdir -p "${pkgdir}/opt/studio"
     virtualenv2 --system-site-packages "${pkgdir}/opt/studio"
     cp -a ${srcdir}/webapp-master ${pkgdir}/opt/studio/webapp
-    ${pkgdir}/opt/studio/bin/pip install pytz==2014.10 
+    ${pkgdir}/opt/studio/bin/pip install pytz==2015.2
     ${pkgdir}/opt/studio/bin/pip install --upgrade -r ${pkgdir}/opt/studio/webapp/requirements.txt
     virtualenv2 --relocatable "${pkgdir}/opt/studio"
     chown -R 1000:1000 ${pkgdir}/opt/studio
