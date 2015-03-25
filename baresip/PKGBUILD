@@ -1,7 +1,7 @@
 # Maintainer: Sebastian Reimers <service@it-sreimers.de>
 pkgname=baresip
-pkgver=15.1.1
-pkgrel=4
+pkgver=15.3.0
+pkgrel=1
 arch=(armv7h x86_64)
 url="http://www.creytiv.com/baresip.html"
 patch_url="https://github.com/Studio-Link/baresip/compare/Studio-Link:master"
@@ -9,7 +9,8 @@ license=('BSD license')
 depends=(glibc)
 #options=(!strip)
 source=(https://github.com/studio-link/baresip/archive/$pkgver-beta.tar.gz)
-md5sums=('6781953409e664a4f859f2c7773c3490')
+#md5sums=('6781953409e664a4f859f2c7773c3490')
+md5sums=('SKIP')
 
 build() {
     cd $pkgname-$pkgver-beta
