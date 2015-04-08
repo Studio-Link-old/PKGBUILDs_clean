@@ -1,21 +1,22 @@
 # Maintainer: Sebastian Reimers <hallo@studio-link.de>
 pkgname=studio-webapp
-pkgver=15.3.0
-pkgrel=3
+pkgver=15.3.1
+pkgrel=1
 arch=(armv7h x86_64)
 license=('BSD license')
-source=("https://github.com/Studio-Link/webapp/archive/master.tar.gz")
+branch='15_3_0'
+source=("https://github.com/Studio-Link/webapp/archive/${branch}.tar.gz")
 md5sums=('SKIP')
 
 build() {
-    cd webapp-master/long_polling
+    cd webapp-${branch}/long_polling
     make
 }
 
 package() {
     mkdir -p "${pkgdir}/opt/studio"
     virtualenv2 --system-site-packages "${pkgdir}/opt/studio"
-    cp -a ${srcdir}/webapp-master ${pkgdir}/opt/studio/webapp
+    cp -a ${srcdir}/webapp-${branch} ${pkgdir}/opt/studio/webapp
     ${pkgdir}/opt/studio/bin/pip install pytz==2015.2
     ${pkgdir}/opt/studio/bin/pip install --upgrade -r ${pkgdir}/opt/studio/webapp/requirements.txt
     virtualenv2 --relocatable "${pkgdir}/opt/studio"

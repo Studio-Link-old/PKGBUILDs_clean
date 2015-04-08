@@ -3,7 +3,7 @@ qemu="/opt/qemu-2.2.0/arm-softmmu/qemu-system-arm"
 ssh="ssh  -o StrictHostKeyChecking=no root@127.0.0.1 -p2222"
 scp="scp -P2222 -r root@127.0.0.1:"
 pacman="pacman --noconfirm --force --needed"
-version="15.3.0-beta"
+version="15.3.1-beta"
 pkgbuilds="
 opus
 jack2
