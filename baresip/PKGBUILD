@@ -15,9 +15,9 @@ md5sums=('SKIP')
 build() {
     cd $pkgname-$pkgver-beta
     curl ${patch_url}...redis.patch | patch -p1
+    curl ${patch_url}...gpio.patch | patch -p1 -F3
     curl ${patch_url}...jack.patch | patch -p1
     curl ${patch_url}...opus_mono.patch | patch -p1
-    curl ${patch_url}...gpio.patch | patch -p1
     make
 }
 
